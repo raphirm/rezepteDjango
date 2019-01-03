@@ -25,7 +25,7 @@ SECRET_KEY = '#(&2r77)wqbcq#n=1m9zaj28@u6&68p3_+v66rg-&e$zak56t8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['rezepte.marques.pw', '10.42.24.5']
 
 
 # Application definition
