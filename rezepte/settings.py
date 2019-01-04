@@ -25,7 +25,7 @@ SECRET_KEY = '#(&2r77)wqbcq#n=1m9zaj28@u6&68p3_+v66rg-&e$zak56t8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['rezepte.marques.pw', '10.42.24.5']
+ALLOWED_HOSTS = ['rezepte.marques.pw', '10.42.24.5', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rezept.apps.RezeptConfig',
+    'polls.apps.PollsConfig',
 ]
 
 MIDDLEWARE = [
