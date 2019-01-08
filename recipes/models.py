@@ -28,23 +28,28 @@ class Recipes(models.Model):
     forPeople = models.IntegerField(default=2)
     cKal = models.IntegerField(default=0)
     timeToMake = models.IntegerField(blank=True, default=20)
+    timeToMakeActive = models.IntegerField(blank=True, default=20)
 
     def __str__(self):
         return self.title
 
 
 class Steps(models.Model):
-    stepNr = models.IntegerField()
-    description = models.TextField()
+    stepNr = models.CharField(max_length=100, blank=True)
+    description = models.TextField(blank=True)
     recipes = models.ForeignKey(Recipes, on_delete=models.CASCADE)
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self):
         return self.stepNr
 
+    class Meta(object):
+        ordering = ['my_order']
 
 class Ingredients(models.Model):
     name = models.CharField(max_length=200)
-    health = models.IntegerField(default=0)
+    health = models.IntegerField(default=0, blank=True)
+    separator = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -57,11 +62,24 @@ class Unit(models.Model):
         return self.unit
 
 
+class Processed(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class IngredientsAmount(models.Model):
+    my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
     name = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
-    recipes = models.ForeignKey(Recipes, on_delete=models.CASCADE)
-    amount = models.IntegerField()
-    unit = models.ForeignKey(Unit, on_delete=models.DO_NOTHING)
+    recipes = models.ForeignKey(Recipes, on_delete=models.CASCADE, blank=True)
+    amount = models.IntegerField(default=0, blank=True)
+    unit = models.ForeignKey(Unit, on_delete=models.DO_NOTHING, blank=True)
+    processed = models.ForeignKey(Processed, on_delete=models.DO_NOTHING, blank=True, null=True)
 
+    def __str__(self):
+        return str(self.amount)+' '+str(self.unit)+' '+str(self.name)
 
+    class Meta(object):
+        ordering = ['my_order']
 
