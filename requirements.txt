@@ -4,3 +4,7 @@
 ###### Requirements without Version Specifiers ######
 Django
 django-crispy-forms
+djangorestframework
+markdown
+django-filter
+pillow

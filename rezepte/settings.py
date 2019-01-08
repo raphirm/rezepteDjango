@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rezept.apps.RezeptConfig',
     'polls.apps.PollsConfig',
+    'recipes.apps.RecipesConfig'
 ]
 
 MIDDLEWARE = [
