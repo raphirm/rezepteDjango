@@ -4,13 +4,14 @@ from django.db import models
 from django.db import models
 import datetime
 import time
-
+from ckeditor.fields import RichTextField
 
 class Labels(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
+
 
 class Utilities(models.Model):
     utility = models.CharField(max_length=200)
@@ -22,7 +23,7 @@ class Utilities(models.Model):
 
 class Recipes(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = RichTextField()
     utilities = models.ManyToManyField(Utilities, blank=True)
     labels = models.ManyToManyField(Labels)
     forPeople = models.IntegerField(default=2)
@@ -73,8 +74,8 @@ class IngredientsAmount(models.Model):
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
     name = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
     recipes = models.ForeignKey(Recipes, on_delete=models.CASCADE, blank=True)
-    amount = models.IntegerField(default=0, blank=True)
-    unit = models.ForeignKey(Unit, on_delete=models.DO_NOTHING, blank=True)
+    amount = models.IntegerField(default=0, blank=True, null=True)
+    unit = models.ForeignKey(Unit, on_delete=models.DO_NOTHING, blank=True, null=True)
     processed = models.ForeignKey(Processed, on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):

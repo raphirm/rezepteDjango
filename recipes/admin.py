@@ -5,11 +5,14 @@ from django.contrib import admin
 from adminsortable2.admin import SortableInlineAdminMixin
 from .models import Recipes, Utilities, Ingredients, Steps, IngredientsAmount, Unit, Labels, Processed
 
-class StepsAdmin(SortableInlineAdminMixin, admin.TabularInline):
+class StepsAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = Steps
+    extra = 0
+
 
 class IngrAdmin(SortableInlineAdminMixin, admin.TabularInline):
     model = IngredientsAmount
+    extra = 0
 
 class RecipesAdmin(admin.ModelAdmin):
     inlines = [
