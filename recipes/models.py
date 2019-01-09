@@ -4,6 +4,7 @@ from django.db import models
 from django.db import models
 import datetime
 import time
+from PIL import Image, ImageOps
 from ckeditor.fields import RichTextField
 
 class Labels(models.Model):
@@ -30,9 +31,19 @@ class Recipes(models.Model):
     cKal = models.IntegerField(default=0)
     timeToMake = models.IntegerField(blank=True, default=20)
     timeToMakeActive = models.IntegerField(blank=True, default=20)
+    image = models.ImageField(null=True, blank=True, upload_to="recipesImages")
 
     def __str__(self):
         return self.title
+
+    def save(self):
+        super(Recipes, self).save()
+        if(self.image):
+            thumbnailSize = 128, 128
+            thumbnailFile = self.image.path + ".thumbnail.jpeg"
+            image = Image.open(self.image.path)
+            image = ImageOps.fit(image, thumbnailSize, Image.ANTIALIAS)
+            image.convert('RGB').save(thumbnailFile, 'JPEG')
 
 
 class Steps(models.Model):
@@ -74,7 +85,7 @@ class IngredientsAmount(models.Model):
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
     name = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
     recipes = models.ForeignKey(Recipes, on_delete=models.CASCADE, blank=True)
-    amount = models.IntegerField(default=0, blank=True, null=True)
+    amount = models.FloatField(default=0, blank=True, null=True)
     unit = models.ForeignKey(Unit, on_delete=models.DO_NOTHING, blank=True, null=True)
     processed = models.ForeignKey(Processed, on_delete=models.DO_NOTHING, blank=True, null=True)
 
