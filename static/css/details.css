@@ -1,0 +1,25 @@
+.cta-inner.text-center.rounded {
+  margin: 0.2rem;
+  padding: 0.4rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Raleway;
+}
+
+.col-md-6 {
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+.section-heading .section-heading-lower {
+}
+
+.page-section.cta {
+  margin-top: 1rem;
+  margin-bottom: 0rem;
+  /*padding-top: 0rem;*/
+}
+
