@@ -1,0 +1,25 @@
+@media (max-width: 767px) {
+    .column {
+        width: 100%;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .column {
+        width: 50%;
+    }
+}
+@media (min-width: 1025px) {
+    .column {
+        width: 25%;
+    }
+}
+
+.mt-3 {
+  margin-top: 3px !important;
+}
+
+a.card,
+a.card:hover {
+  color: #212529;
+  text-decoration: none;
+}

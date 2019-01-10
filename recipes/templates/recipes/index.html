@@ -1,0 +1,116 @@
+<!doctype html>
+{% load static %}
+{% load tags %}
+<script>
+    {% autoescape off %}
+        var recipes = {{ recipes | jsona }}
+    {% endautoescape %}
+    function searchRecipes() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchinput");
+        filter = input.value.toUpperCase();
+        var cardslist = document.getElementById("cardslist");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < recipes.length; i++) {
+            var found = false;
+            if (recipes[i].title.toUpperCase().indexOf(filter) > -1) {
+                found = true
+            }
+            for (j = 0; j < recipes[i].utilities.length; j++) {
+                if (recipes[i].utilities[j].utility.toUpperCase().indexOf(filter) > -1) {
+                    found = true
+                }
+
+            }
+            for (j = 0; j < recipes[i].labels.length; j++) {
+                if (recipes[i].labels[j].name.toUpperCase().indexOf(filter) > -1) {
+                    found = true
+                }
+            }
+            for (j = 0; j < recipes[i].ingredients.length; j++) {
+                if (recipes[i].ingredients[j].name.name.toUpperCase().indexOf(filter) > -1) {
+                    found = true
+                }
+            }
+
+            if (found) {
+                document.getElementById("recipe-" + recipes[i].id).style.display = "";
+            } else {
+                document.getElementById("recipe-" + recipes[i].id).style.display = "none";
+
+            }
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/grid.css" >
+
+    <title>Geniesser-Rezepte</title>
+</head>
+<body>
+<div class="container">
+
+    <!-- Grid row -->
+    <h1 class="my-4">Geniesser Rezepte<br />
+        <small> Rezepte aus der Brandstrasse</small>
+    </h1>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8" >
+            <form >
+
+                <!--end of col-->
+                <div class="col">
+                    <input oninput="searchRecipes()" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Suche nach Stichwörter - Zutaten, Titel, Utensilien, Labels" id="searchinput">
+                </div>
+                <!--end of col-->
+
+                <!--end of col-->
+            </form>
+        </div>
+        <!--end of col-->
+    </div>
+
+
+    <div class="row mt-3">
+
+        {% for recipe in recipes %}
+
+            <!-- Grid column -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4" id="recipe-{{ recipe.id }}" >
+
+                <!--Card Primary-->
+                <a href="/recipes/{{ recipe.id }}/" class="card h-100" >
+                    <img src="{% get_media_prefix %}{{ recipe.image }}.thumbnail.jpeg" class="card-img-top">
+                    <div class="card-body">
+                        <p class="card-text mb-0">
+                            {{ recipe.title }}</p>
+                    </div>
+                </a>
+                <!--/.Card Primary-->
+
+            </div>
+            <!-- Grid column -->
+
+        {% endfor %}
+    </div>
+    <!-- Grid row -->
+</div>
+</body>
+</html>

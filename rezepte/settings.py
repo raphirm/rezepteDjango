@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'recipes.apps.RecipesConfig',
     'adminsortable2',
     'ckeditor',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

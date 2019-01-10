@@ -4,6 +4,7 @@ from django.db import models
 from django.db import models
 import datetime
 import time
+import json
 from PIL import Image, ImageOps
 from ckeditor.fields import RichTextField
 
@@ -39,7 +40,7 @@ class Recipes(models.Model):
     def save(self):
         super(Recipes, self).save()
         if(self.image):
-            thumbnailSize = 128, 128
+            thumbnailSize = 300, 200
             thumbnailFile = self.image.path + ".thumbnail.jpeg"
             image = Image.open(self.image.path)
             image = ImageOps.fit(image, thumbnailSize, Image.ANTIALIAS)
@@ -49,7 +50,7 @@ class Recipes(models.Model):
 class Steps(models.Model):
     stepNr = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
-    recipes = models.ForeignKey(Recipes, on_delete=models.CASCADE)
+    recipes = models.ForeignKey(Recipes, related_name='steps', on_delete=models.CASCADE)
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     def __str__(self):
@@ -84,7 +85,7 @@ class Processed(models.Model):
 class IngredientsAmount(models.Model):
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
     name = models.ForeignKey(Ingredients, on_delete=models.CASCADE)
-    recipes = models.ForeignKey(Recipes, on_delete=models.CASCADE, blank=True)
+    recipes = models.ForeignKey(Recipes, related_name='ingredients', on_delete=models.CASCADE, blank=True)
     amount = models.FloatField(default=0, blank=True, null=True)
     unit = models.ForeignKey(Unit, on_delete=models.DO_NOTHING, blank=True, null=True)
     processed = models.ForeignKey(Processed, on_delete=models.DO_NOTHING, blank=True, null=True)
