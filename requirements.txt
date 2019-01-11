@@ -10,3 +10,4 @@ django-filter
 pillow
 django-admin-sortable2
 django-ckeditor
+psycopg2
