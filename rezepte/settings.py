@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'rezept.apps.RezeptConfig',
-    'polls.apps.PollsConfig',
     'recipes.apps.RecipesConfig',
     'adminsortable2',
     'ckeditor',
