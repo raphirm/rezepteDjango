@@ -72,7 +72,7 @@
             <div
                 class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav mx-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/recipes">Rezeptübersicht</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/">Rezeptübersicht</a></li>
                 </ul>
         </div>
         </div>
@@ -86,7 +86,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4" id="recipe-{{ recipe.id }}" >
 
                 <!--Card Primary-->
-                <a href="/recipes/{{ recipe.id }}/" class="card h-100 rounded bg-faded text-center custom-card " >
+                <a href="/{{ recipe.id }}/" class="card h-100 rounded bg-faded text-center custom-card " >
                     <img src="{% get_media_prefix %}{{ recipe.image }}.thumbnail.jpeg" class="card-img-top ontop">
                     <div class="card-body text-center special-card">
                         <p class="card-text mb-0 special-card-text">

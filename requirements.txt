@@ -13,3 +13,4 @@ django-ckeditor
 psycopg2
 gunicorn
 whitenoise
+django-storages

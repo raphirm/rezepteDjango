@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'adminsortable2',
     'ckeditor',
     'rest_framework',
+    'storages'
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

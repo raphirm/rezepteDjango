@@ -40,7 +40,7 @@ class Recipes(models.Model):
     def save(self):
         super(Recipes, self).save()
         if(self.image):
-            thumbnailSize = 300, 200
+            thumbnailSize = 900, 600
             thumbnailFile = self.image.path + ".thumbnail.jpeg"
             image = Image.open(self.image.path)
             image = ImageOps.fit(image, thumbnailSize, Image.ANTIALIAS)
