@@ -26,6 +26,7 @@ SECRET_KEY = '#(&2r77)wqbcq#n=1m9zaj28@u6&68p3_+v66rg-&e$zak56t8'
 if os.getenv('DJANGO_ENV') == 'prod':
     DEBUG = True
     ALLOWED_HOSTS = ['rezepte.marques.pw', '10.42.24.5', '127.0.0.1']
+    CSRF_TRUSTED_ORIGINS = ['rezepte.marques.pw', '10.42.24.5']
 else:
     DEBUG = True
     ALLOWED_HOSTS = []
