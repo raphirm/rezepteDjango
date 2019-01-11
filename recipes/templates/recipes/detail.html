@@ -1,44 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
 {% load static %}
 {% load tags %}
-<script>
-</script>
-<html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/detailRecipes.css" >
-
-    <title>Geniesser-Rezepte</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="/static/bsdesign/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i">
+    <link rel="stylesheet" href="/static/bsdesign/css/untitled.css">
 </head>
-<body>
-<div class="container">
-<a href="/recipes" type="button" class="btn btn-primary">Zurück</a>
 
-    <h1>{{ recipes.title }}</h1>
-    <img src="{{ recipes.image }}" class="img-fluid" alt="Responsive image">
-    <p>
-            {% autoescape off %}
-{{ recipes.description }}</p>
-{% endautoescape %}
-    <br />
-    <p><b>Personen:</b>{{ recipes.forPeople}}</p>
-    <p><b>Kalorien: </b>{{ recipes.cKal }}</p>
-    <p><b>Zubereitungsdauer: </b>{{ recipes.timeToMake }}</p>
-    <p><b>Aktive Zubereitungsdauer: </b>{{ recipes.timeToMakeActive }}</p>
-    <br />
-    <p><b>Labels: </b>
-        {% for label in recipes.labels %}
-            {{ label.name }} <br />
-        {% endfor %}
-    </p>
-<br />
-    <p><h2>Zutaten: </h2><br />
-        {% for ingredient in recipes.ingredients %}
+<body style="background:linear-gradient(rgba(47, 23, 15, 0.5), rgba(47, 23, 15, 0.5)), url('/static/bsdesign/img/background.jpg');background-size:contain;">
+    <h1 class="text-center text-white d-none d-lg-block site-heading"><span class="text-primary site-heading-upper mb-3">Rezepte aus der Brandstrasse</span><span class="site-heading-lower">Geniesser Rezepte</span></h1>
+    <nav class="navbar navbar-light navbar-expand-lg bg-dark py-lg-4" id="mainNav">
+        <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav mx-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/recipes">Rezeptübersicht</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <section class="page-section clearfix">
+        <div class="container">
+            <div class="intro"><img class="img-fluid intro-img mb-3 mb-lg-0 rounded" src="{{ recipes.image }}">
+                <div class="intro-text left-0 text-centerfaded p-5 rounded bg-faded text-center">
+                    <h2 class="section-heading mb-4"><span class="section-heading-upper"></span><span class="section-heading-lower">{{ recipes.title }}</span></h2>
+                    <p class="mb-3">
+
+                    </p>
+                      </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <div class="cta-inner text-center rounded">
+                        <h2 class="section-heading mb-4"><span class="section-heading-lower">Beschreibung</span></h2>
+                        <p>                                         {% autoescape off %}
+                    {{ recipes.description }}
+                    {% endautoescape %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <div class="cta-inner text-center rounded">
+                        <h2 class="section-heading mb-4"><span class="section-heading-lower">Rezept Informationen</span></h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3></h3>
+                                <h3>Zutaten</h3>
+                                <p>
+                                      {% for ingredient in recipes.ingredients %}
             {% if ingredient.name.separator %}
                 <br /><b> {{ ingredient.name.name }}</b>  <br />
 
@@ -47,17 +70,51 @@
 
             {% endif %}
         {% endfor %}
-    </p>
-<br />
-    <p><h2>Zubereitung:</h2></p>
-    {% for steps in recipes.steps %}
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <h3>Informationen</h3>
+                                <p>
+<p><b>Anzahl Portionen:</b> {{ recipes.forPeople}} Personen</p>
+    <p><b>Kalorien: </b>{{ recipes.cKal }} cKal</p>
+    <p><b>Zubereitungsdauer: </b>{{ recipes.timeToMake }} Minuten</p>
+    <p><b>Aktive Zubereitungsdauer: </b>{{ recipes.timeToMakeActive }} Minuten</p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <div class="cta-inner text-center rounded">
+                        <h2 class="section-heading mb-4"><span class="section-heading-lower">Zubereitung</span></h2>
+                        <p>{% for steps in recipes.steps %}
             {% if steps.description and steps.description.strip %}
                 <br /><b> {{ steps.stepNr }}</b> <br /> {{ steps.description }}<br />
 
             {% else %}
                 <br /><b>{{ steps.stepNr }}</b>
             {% endif %}
-        {% endfor %}
-
-</div>
+        {% endfor %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div></div>
+    <footer class="footer text-faded text-center py-5">
+        <div class="container">
+            <p class="m-0 small">Copyright&nbsp;©&nbsp;Raphael Marques 2018</p>
+        </div>
+    </footer>
+    <script src="/static/bsdesign/js/jquery.min.js"></script>
+    <script src="/static/bsdesign/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/bsdesign/js/current-day.js"></script>
 </body>
+
+</html>

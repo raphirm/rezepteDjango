@@ -1,0 +1,63 @@
+<!doctype html>
+{% load static %}
+{% load tags %}
+<script>
+</script>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/detailRecipes.css" >
+
+    <title>Geniesser-Rezepte</title>
+</head>
+<body>
+<div class="container">
+<a href="/recipes" type="button" class="btn btn-primary">Zurück</a>
+
+    <h1>{{ recipes.title }}</h1>
+    <img src="{{ recipes.image }}" class="img-fluid" alt="Responsive image">
+    <p>
+            {% autoescape off %}
+{{ recipes.description }}</p>
+{% endautoescape %}
+    <br />
+    <p><b>Personen:</b>{{ recipes.forPeople}}</p>
+    <p><b>Kalorien: </b>{{ recipes.cKal }}</p>
+    <p><b>Zubereitungsdauer: </b>{{ recipes.timeToMake }}</p>
+    <p><b>Aktive Zubereitungsdauer: </b>{{ recipes.timeToMakeActive }}</p>
+    <br />
+    <p><b>Labels: </b>
+        {% for label in recipes.labels %}
+            {{ label.name }} <br />
+        {% endfor %}
+    </p>
+<br />
+    <p><h2>Zutaten: </h2><br />
+        {% for ingredient in recipes.ingredients %}
+            {% if ingredient.name.separator %}
+                <br /><b> {{ ingredient.name.name }}</b>  <br />
+
+            {% else %}
+                {{ ingredient.myorder }} {{ ingredient.amount }} {{ ingredient.unit.unit }} {{ ingredient.name.name }}, {{ ingredient.processed.name }}  <br />
+
+            {% endif %}
+        {% endfor %}
+    </p>
+<br />
+    <p><h2>Zubereitung:</h2></p>
+    {% for steps in recipes.steps %}
+            {% if steps.description and steps.description.strip %}
+                <br /><b> {{ steps.stepNr }}</b> <br /> {{ steps.description }}<br />
+
+            {% else %}
+                <br /><b>{{ steps.stepNr }}</b>
+            {% endif %}
+        {% endfor %}
+
+</div>
+</body>
