@@ -12,3 +12,4 @@ django-admin-sortable2
 django-ckeditor
 psycopg2
 gunicorn
+whitenoise
