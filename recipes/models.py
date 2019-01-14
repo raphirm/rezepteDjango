@@ -49,7 +49,7 @@ class Recipes(models.Model):
 
 class Steps(models.Model):
     stepNr = models.CharField(max_length=100, blank=True)
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True)
     recipes = models.ForeignKey(Recipes, related_name='steps', on_delete=models.CASCADE)
     my_order = models.PositiveIntegerField(default=0, blank=False, null=False)
 

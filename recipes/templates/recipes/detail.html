@@ -95,7 +95,7 @@
                         <h2 class="section-heading mb-4"><span class="section-heading-lower">Zubereitung</span></h2>
                         <p>{% for steps in recipes.steps %}
             {% if steps.description and steps.description.strip %}
-                <br /><b> {{ steps.stepNr }}</b> <br /> {{ steps.description }}<br />
+                <br /><b> {{ steps.stepNr }}</b> <br />   {% autoescape off %}{{ steps.description }}{% endautoescape %}<br />
 
             {% else %}
                 <br /><b>{{ steps.stepNr }}</b>
