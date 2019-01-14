@@ -66,7 +66,7 @@
                 <br /><b> {{ ingredient.name.name }}</b>  <br />
 
             {% else %}
-                {{ ingredient.myorder }} {{ ingredient.amount }} {{ ingredient.unit.unit }} {{ ingredient.name.name }}, {{ ingredient.processed.name }}  <br />
+                {{ ingredient.myorder }} {{ ingredient.amount|floatformat }} {{ ingredient.unit.unit }} {{ ingredient.name.name }}{% if ingredient.processed.name %}, {% endif %}{{ ingredient.processed.name }}  <br />
 
             {% endif %}
         {% endfor %}
