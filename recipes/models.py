@@ -7,12 +7,16 @@ import time
 import json
 from PIL import Image, ImageOps
 from ckeditor.fields import RichTextField
+from django.core.exceptions import ValidationError
+
 
 class Labels(models.Model):
     name = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
+
+
 
 
 class Utilities(models.Model):

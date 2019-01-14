@@ -4,6 +4,8 @@ from django.contrib import admin
 from django.contrib import admin
 from adminsortable2.admin import SortableInlineAdminMixin
 from .models import Recipes, Utilities, Ingredients, Steps, IngredientsAmount, Unit, Labels, Processed
+from django import forms
+
 
 class StepsAdmin(SortableInlineAdminMixin, admin.StackedInline):
     model = Steps
@@ -18,13 +20,26 @@ class IngrAdmin(SortableInlineAdminMixin, admin.TabularInline):
     extra = 0
     autocomplete_fields = ['name']
 
+class LabelsAdminForm(forms.ModelForm):
+    model = Labels
+    def clean_name(self):
+        if ((' ' in self.cleaned_data["name"]) == True):
+            raise forms.ValidationError(('Spaces not allowed'), code='invalid')
+        else:
+            return self.cleaned_data["name"]
+
 class LabelsAdmin(admin.ModelAdmin):
     model = Labels
+    form = LabelsAdminForm
     search_fields = ['name']
 
 class UtilAdmin(admin.ModelAdmin):
     model = Utilities;
     search_fields = ['utility']
+
+
+
+
 class RecipesAdmin(admin.ModelAdmin):
     autocomplete_fields = ['labels', 'utilities']
     inlines = [
@@ -32,6 +47,8 @@ class RecipesAdmin(admin.ModelAdmin):
         StepsAdmin
 
     ]
+
+
 
 admin.site.register(Labels, LabelsAdmin)
 
