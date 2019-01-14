@@ -95,7 +95,7 @@ class IngredientsAmount(models.Model):
     recipes = models.ForeignKey(Recipes, related_name='ingredients', on_delete=models.CASCADE, blank=True)
     amount = models.FloatField(default=0, blank=True, null=True)
     unit = models.ForeignKey(Unit, on_delete=models.DO_NOTHING, blank=True, null=True)
-    processed = models.ForeignKey(Processed, on_delete=models.DO_NOTHING, blank=True, null=True)
+    processed = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return str(self.amount)+' '+str(self.unit)+' '+str(self.name)
