@@ -65,7 +65,10 @@ class Ingredients(models.Model):
     separator = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        if(self.separator):
+            return self.name+" - Titel"
+        else:
+            return self.name
 
 
 class Unit(models.Model):
