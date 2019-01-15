@@ -31,7 +31,7 @@ class Recipes(models.Model):
     title = models.CharField(max_length=200)
     description = RichTextField(null=True, blank=True)
     utilities = models.ManyToManyField(Utilities, blank=True)
-    labels = models.ManyToManyField(Labels)
+    labels = models.ManyToManyField(Labels, null=True, blank=True)
     forPeople = models.IntegerField(default=2)
     cKal = models.IntegerField(default=0)
     timeToMake = models.IntegerField(blank=True, default=20)
