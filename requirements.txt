@@ -14,3 +14,4 @@ psycopg2
 gunicorn
 whitenoise
 django-storages
+django-richtextfield

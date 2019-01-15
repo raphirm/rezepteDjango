@@ -6,7 +6,7 @@ import datetime
 import time
 import json
 from PIL import Image, ImageOps
-from ckeditor.fields import RichTextField
+from djrichtextfield.models import RichTextField
 from django.core.exceptions import ValidationError
 
 
@@ -29,7 +29,7 @@ class Utilities(models.Model):
 
 class Recipes(models.Model):
     title = models.CharField(max_length=200)
-    description = RichTextField()
+    description = RichTextField(null=True, blank=True)
     utilities = models.ManyToManyField(Utilities, blank=True)
     labels = models.ManyToManyField(Labels)
     forPeople = models.IntegerField(default=2)

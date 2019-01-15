@@ -45,7 +45,6 @@ class RecipesAdmin(admin.ModelAdmin):
     inlines = [
         IngrAdmin,
         StepsAdmin
-
     ]
 
 
